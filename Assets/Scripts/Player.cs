@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 	public float invincibleTime;
 	public GameObject model;
 
+
 	private Animator anim;
 	private Rigidbody rb;
 	private BoxCollider boxCollider;
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour {
 	private bool invincible = false;
 	static int blinkingValue;
 	private UIManager uiManager;
+	private float timecounter;
+
 	[HideInInspector]
 	public int coins;
 	[HideInInspector]
@@ -157,6 +160,16 @@ public class Player : MonoBehaviour {
 				anim.SetBool("Sliding", false);
 				boxCollider.size = boxColliderSize;
 			}
+		}
+
+		timecounter += Time.deltaTime;
+		Debug.Log(timecounter);
+
+		if (timecounter >= 10f)
+		{
+			Debug.Log("mudou");
+			uiManager.UpdateBucket();
+			timecounter = 0f;
 		}
 
 		Vector3 targetPosition = new Vector3(verticalTargetPosition.x, verticalTargetPosition.y, transform.position.z);

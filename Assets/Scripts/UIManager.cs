@@ -6,9 +6,16 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
 
 	public Image[] lifeHearts;
+	public Sprite[] buckets;
 	public Text coinText;
 	public GameObject gameOverPanel;
+	public Image bucketObject;
 	public Text scoreText;
+
+	void Start()
+    {
+		bucketObject.GetComponent<Image>();
+	}
 
 	public void UpdateLives(int lives)
 	{
@@ -33,6 +40,12 @@ public class UIManager : MonoBehaviour {
 	public void UpdateScore(int score)
 	{
 		scoreText.text = "Score: " + score + "m";
+	}
+
+	public void UpdateBucket()
+    {
+		bucketObject.sprite = buckets[Random.Range(0, buckets.Length)];
+
 	}
 
 }
