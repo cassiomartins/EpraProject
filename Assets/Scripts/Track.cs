@@ -12,6 +12,7 @@ public class Track : MonoBehaviour {
 	public List<GameObject> newObstacles;
 	public List<GameObject> newCoins;
 
+
 	// Use this for initialization
 	void Start () {
 
@@ -34,7 +35,7 @@ public class Track : MonoBehaviour {
 		PositionateCoins();
 
 	}
-	
+
 	void PositionateObstacles()
 	{
 		for (int i = 0; i < newObstacles.Count; i++)
