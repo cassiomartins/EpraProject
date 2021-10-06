@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour {
 	private float timecounter;
 
 	[HideInInspector]
-	public int coins;
+	public int recyclables;
 	[HideInInspector]
 	public float score;
 
@@ -54,7 +55,6 @@ public class Player : MonoBehaviour {
 		
 		blinkingValue = Shader.PropertyToID("_BlinkingValue");
 		uiManager = FindObjectOfType<UIManager>();
-		GameManager.gm.StartMissions();
 
 		Invoke("StartRun", 3f);
 	}
@@ -163,11 +163,9 @@ public class Player : MonoBehaviour {
 		}
 
 		timecounter += Time.deltaTime;
-		Debug.Log(timecounter);
 
 		if (timecounter >= 10f)
 		{
-			Debug.Log("mudou");
 			uiManager.UpdateBucket();
 			timecounter = 0f;
 		}
@@ -227,10 +225,10 @@ public class Player : MonoBehaviour {
 	private void OnTriggerEnter(Collider other)
 	{
 
-		if (other.CompareTag("Coin"))
+		if (other.CompareTag("Recyclable"))
 		{
-			coins++;
-			uiManager.UpdateCoins(coins);
+			recyclables++;
+			uiManager.UpdateRecyclables(recyclables);
 			other.transform.parent.gameObject.SetActive(false);
 		}
 
@@ -301,8 +299,7 @@ public class Player : MonoBehaviour {
 
 	void CallMenu()
 	{
-		GameManager.gm.coins += coins;
-		GameManager.gm.EndRun();
+		SceneManager.LoadScene(0);
 	}
 
 	public void IncreaseSpeed()

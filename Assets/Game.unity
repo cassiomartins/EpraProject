@@ -15580,10 +15580,15 @@ MonoBehaviour:
   - {fileID: 1000011769374998, guid: b19a0bd8ede69fe4683dff84150a047b, type: 2}
   - {fileID: 1000013842435444, guid: d68ac797bf384f84bbca159dc2a6e4d7, type: 2}
   numberOfObstacles: {x: 15, y: 20}
-  coin: {fileID: 1243696942136494, guid: 7442f27832f20a34cb2a1341faa73068, type: 2}
-  numberOfCoins: {x: 50, y: 80}
+  recyclable:
+  - {fileID: 1243696942136494, guid: 7442f27832f20a34cb2a1341faa73068, type: 2}
+  - {fileID: 1521069628053312, guid: 8885709352f22b44295f25c8dbcd49a4, type: 2}
+  - {fileID: 1127520807276502, guid: c03fefa9b9b3dc3478e7c30858a9f960, type: 2}
+  - {fileID: 1048454059077540, guid: 1b980fb313691eb48b3ff57c7a3b210f, type: 2}
+  - {fileID: 1153823115653934, guid: 215f3bfb3d736e74f9ba67fbd5d70f5e, type: 2}
+  numberOfRecyclable: {x: 75, y: 100}
   newObstacles: []
-  newCoins: []
+  newRecyclables: []
 --- !u!4 &688685303
 Transform:
   m_ObjectHideFlags: 0
@@ -16587,10 +16592,15 @@ MonoBehaviour:
   - {fileID: 1000011769374998, guid: b19a0bd8ede69fe4683dff84150a047b, type: 2}
   - {fileID: 1000013842435444, guid: d68ac797bf384f84bbca159dc2a6e4d7, type: 2}
   numberOfObstacles: {x: 15, y: 20}
-  coin: {fileID: 1243696942136494, guid: 7442f27832f20a34cb2a1341faa73068, type: 2}
-  numberOfCoins: {x: 50, y: 80}
+  recyclable:
+  - {fileID: 1243696942136494, guid: 7442f27832f20a34cb2a1341faa73068, type: 2}
+  - {fileID: 1521069628053312, guid: 8885709352f22b44295f25c8dbcd49a4, type: 2}
+  - {fileID: 1127520807276502, guid: c03fefa9b9b3dc3478e7c30858a9f960, type: 2}
+  - {fileID: 1048454059077540, guid: 1b980fb313691eb48b3ff57c7a3b210f, type: 2}
+  - {fileID: 1153823115653934, guid: 215f3bfb3d736e74f9ba67fbd5d70f5e, type: 2}
+  numberOfRecyclable: {x: 75, y: 100}
   newObstacles: []
-  newCoins: []
+  newRecyclables: []
 --- !u!4 &754056213
 Transform:
   m_ObjectHideFlags: 0
@@ -27266,7 +27276,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 306646f85212dcb42b07ba42f9120705, type: 3}
   - {fileID: 21300000, guid: abcf5a9b10a26204e8859f22924fd230, type: 3}
   - {fileID: 21300000, guid: c23db520b6c783343906962cc53e2fb9, type: 3}
-  coinText: {fileID: 1423748093}
+  recyclableText: {fileID: 1423748093}
   gameOverPanel: {fileID: 1556558608}
   bucketObject: {fileID: 1893820733}
   scoreText: {fileID: 845376243}
@@ -30419,7 +30429,7 @@ GameObject:
   - component: {fileID: 1423748094}
   - component: {fileID: 1423748093}
   m_Layer: 5
-  m_Name: Coin Text
+  m_Name: Recyclable Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39677,7 +39687,7 @@ GameObject:
   - component: {fileID: 1858227599}
   - component: {fileID: 1858227598}
   m_Layer: 5
-  m_Name: Coin UI
+  m_Name: Recyclable UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45203,7 +45213,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.8088235, g: 0.88316995, b: 1, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -45237,7 +45247,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2107494611}
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 3.5, z: -5.5}
+  m_LocalPosition: {x: 0, y: 3.72, z: -6.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

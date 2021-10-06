@@ -6,18 +6,18 @@ public class Track : MonoBehaviour {
 
 	public GameObject[] obstacles;
 	public Vector2 numberOfObstacles;
-	public GameObject coin;
-	public Vector2 numberOfCoins;
+	public GameObject[] recyclable;
+	public Vector2 numberOfRecyclable;
 
 	public List<GameObject> newObstacles;
-	public List<GameObject> newCoins;
+	public List<GameObject> newRecyclables;
 
 
 	// Use this for initialization
 	void Start () {
 
 		int newNumberOfObstacles = (int)Random.Range(numberOfObstacles.x, numberOfObstacles.y);
-		int newNumberOfCoins = (int)Random.Range(numberOfCoins.x, numberOfCoins.y);
+		int newNumberOfRecyclables = (int)Random.Range(numberOfRecyclable.x, numberOfRecyclable.y);
 
 		for (int i = 0; i < newNumberOfObstacles; i++)
 		{
@@ -25,14 +25,14 @@ public class Track : MonoBehaviour {
 			newObstacles[i].SetActive(false);
 		}
 
-		for (int i = 0; i < newNumberOfCoins; i++)
+		for (int i = 0; i < newNumberOfRecyclables; i++)
 		{
-			newCoins.Add(Instantiate(coin, transform));
-			newCoins[i].SetActive(false);
+			newRecyclables.Add(Instantiate(recyclable[Random.Range(0,recyclable.Length)], transform));
+			newRecyclables[i].SetActive(false);
 		}
 
 		PositionateObstacles();
-		PositionateCoins();
+		PositionateRecyclabes();
 
 	}
 
@@ -49,16 +49,16 @@ public class Track : MonoBehaviour {
 		}
 	}
 
-	void PositionateCoins()
+	void PositionateRecyclabes()
 	{
 		float minZPos = 10f;
-		for (int i = 0; i < newCoins.Count; i++)
+		for (int i = 0; i < newRecyclables.Count; i++)
 		{
 			float maxZPos = minZPos + 5f;
 			float randomZPos = Random.Range(minZPos, maxZPos);
-			newCoins[i].transform.localPosition = new Vector3(transform.position.x, transform.position.y, randomZPos);
-			newCoins[i].SetActive(true);
-			newCoins[i].GetComponent<ChangeLane>().PositionLane();
+			newRecyclables[i].transform.localPosition = new Vector3(transform.position.x, transform.position.y, randomZPos);
+			newRecyclables[i].SetActive(true);
+			newRecyclables[i].GetComponent<ChangeLane>().PositionLane();
 			minZPos = randomZPos + 1;
 		}
 	}
@@ -70,7 +70,7 @@ public class Track : MonoBehaviour {
 			other.GetComponent<Player>().IncreaseSpeed();
 			transform.position = new Vector3(0, 0, transform.position.z + 297 * 2);
 			PositionateObstacles();
-			PositionateCoins();
+			PositionateRecyclabes();
 		}
 	}
 

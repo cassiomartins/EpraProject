@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour {
 
 	public Image[] lifeHearts;
 	public Sprite[] buckets;
-	public Text coinText;
+	public Text recyclableText;
 	public GameObject gameOverPanel;
 	public Image bucketObject;
 	public Text scoreText;
@@ -32,9 +32,9 @@ public class UIManager : MonoBehaviour {
 		}
 	}
 
-	public void UpdateCoins(int coin)
+	public void UpdateRecyclables(int recyclable)
 	{
-		coinText.text = coin.ToString();
+		recyclableText.text = recyclable.ToString();
 	}
 
 	public void UpdateScore(int score)
@@ -45,7 +45,6 @@ public class UIManager : MonoBehaviour {
 	public void UpdateBucket()
     {
 		bucketObject.sprite = buckets[Random.Range(0, buckets.Length)];
-
 	}
 
 }

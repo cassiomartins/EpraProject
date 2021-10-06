@@ -117,7 +117,7 @@ public class FishesSingleRun : MissionBase
 
 	public override string GetMissionDescription()
 	{
-		return "Colete " + max + " peixes em uma corrida";
+		return "Colete " + max + " materiais recicláveis em uma corrida";
 	}
 
 	public override void RunStart()
@@ -131,6 +131,6 @@ public class FishesSingleRun : MissionBase
 		if (player == null)
 			return;
 
-		progress = player.coins;
+		progress = player.recyclables;
 	}
 }
