@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
@@ -17,7 +18,7 @@ public class Menu : MonoBehaviour {
 	void Start () {
 
 		SetMission();
-		UpdateCoins(GameManager.gm.coins);
+		UpdateCoins(0);
 
 	}
 	
@@ -33,28 +34,21 @@ public class Menu : MonoBehaviour {
 
 	public void StartRun()
 	{
-		if(GameManager.gm.characterCost[characterIndex] <= GameManager.gm.coins)
-		{
-			GameManager.gm.coins -= GameManager.gm.characterCost[characterIndex];
-			GameManager.gm.characterCost[characterIndex] = 0;
-			GameManager.gm.Save();
-			GameManager.gm.StartRun(characterIndex);
-		}
-		
+		SceneManager.LoadScene(1);
 	}
 
 	public void SetMission()
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			MissionBase mission = GameManager.gm.GetMission(i);
+			/*MissionBase mission = GameManager.gm.GetMission(i);
 			missionDescription[i].text = mission.GetMissionDescription();
 			missionReward[i].text = "Recompensa: "  + mission.reward;
 			missionProgress[i].text = mission.progress + mission.currentProgress + " / " + mission.max;
 			if (mission.GetMissionComplete())
 			{
 				rewardButton[i].SetActive(true);
-			}
+			}*/
 		}
 
 		//GameManager.gm.Save();
@@ -62,10 +56,9 @@ public class Menu : MonoBehaviour {
 
 	public void GetReward(int missionIndex)
 	{
-		GameManager.gm.coins += GameManager.gm.GetMission(missionIndex).reward;
-		UpdateCoins(GameManager.gm.coins);
+		//GameManager.gm.recyclables += GameManager.gm.GetMission(missionIndex).reward;
+		//UpdateCoins(GameManager.gm.recyclables);
 		rewardButton[missionIndex].SetActive(false);
-		GameManager.gm.GenerateMission(missionIndex);
 	}
 
 	public void ChangeCharacter(int index)
@@ -89,10 +82,7 @@ public class Menu : MonoBehaviour {
 		}
 
 		string cost = "";
-		if(GameManager.gm.characterCost[characterIndex] != 0)
-		{
-			cost = GameManager.gm.characterCost[characterIndex].ToString();
-		}
+
 		costText.text = cost;
 	}
 
