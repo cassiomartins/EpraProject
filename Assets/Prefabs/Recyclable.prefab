@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114470968509481106}
   m_Layer: 0
   m_Name: Recyclable
-  m_TagString: Recyclable
+  m_TagString: Organic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65201749003733772}
   m_Layer: 0
   m_Name: Fishbone
-  m_TagString: Recyclable
+  m_TagString: Organic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

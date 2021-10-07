@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114244126889784138}
   m_Layer: 0
   m_Name: Recyclable 2
-  m_TagString: Recyclable
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 65891034298722534}
   m_Layer: 0
   m_Name: default
-  m_TagString: Recyclable
+  m_TagString: Glass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

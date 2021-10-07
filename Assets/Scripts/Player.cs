@@ -27,8 +27,6 @@ public class Player : MonoBehaviour {
 	private bool sliding = false;
 	private float slideStart;
 	private Vector3 boxColliderSize;
-	private bool isSwipping = false;
-	private Vector2 startingTouch;
 	private int currentLife;
 	private bool invincible = false;
 	static int blinkingValue;
@@ -55,6 +53,7 @@ public class Player : MonoBehaviour {
 		
 		blinkingValue = Shader.PropertyToID("_BlinkingValue");
 		uiManager = FindObjectOfType<UIManager>();
+		uiManager.UpdateBucket();
 
 		Invoke("StartRun", 3f);
 	}
@@ -83,55 +82,7 @@ public class Player : MonoBehaviour {
 		else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			Slide();
-		}
-
-		if(Input.touchCount == 1)
-		{
-			if (isSwipping)
-			{
-				Vector2 diff = Input.GetTouch(0).position - startingTouch;
-				diff = new Vector2(diff.x / Screen.width, diff.y / Screen.width);
-				if(diff.magnitude > 0.01f)
-				{
-					if(Mathf.Abs(diff.y) > Mathf.Abs(diff.x))
-					{
-						if(diff.y < 0)
-						{
-							Slide();
-						}
-						else
-						{
-							Jump();
-						}
-					}
-					else
-					{
-						if(diff.x < 0)
-						{
-							ChangeLane(-1);
-						}
-						else
-						{
-							ChangeLane(1);
-						}
-					}
-
-					isSwipping = false;
-				}
-			}
-
-			if (Input.GetTouch(0).phase == TouchPhase.Began)
-			{
-				startingTouch = Input.GetTouch(0).position;
-				isSwipping = true;
-			}
-			else if (Input.GetTouch(0).phase == TouchPhase.Ended)
-			{
-				isSwipping = false;
-			}
-		}
-
-		
+		}		
 
 		if (jumping)
 		{
@@ -224,8 +175,31 @@ public class Player : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-
-		if (other.CompareTag("Recyclable"))
+		if (other.CompareTag("Paper") && uiManager.RecyclableType == "Paper")
+		{
+			recyclables++;
+			uiManager.UpdateRecyclables(recyclables);
+			other.transform.parent.gameObject.SetActive(false);
+		}
+		else if (other.CompareTag("Plastic") && uiManager.RecyclableType == "Plastic")
+		{
+			recyclables++;
+			uiManager.UpdateRecyclables(recyclables);
+			other.transform.parent.gameObject.SetActive(false);
+		}
+		else if (other.CompareTag("Metal") && uiManager.RecyclableType == "Metal")
+		{
+			recyclables++;
+			uiManager.UpdateRecyclables(recyclables);
+			other.transform.parent.gameObject.SetActive(false);
+		}
+		else if (other.CompareTag("Organic") && uiManager.RecyclableType == "Organic")
+		{ 
+			recyclables++;
+			uiManager.UpdateRecyclables(recyclables);
+			other.transform.parent.gameObject.SetActive(false);
+		}
+		else if (other.CompareTag("Glass") && uiManager.RecyclableType == "Glass")
 		{
 			recyclables++;
 			uiManager.UpdateRecyclables(recyclables);

@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Obstacle
   - Recyclable
+  - Organic
+  - Paper
+  - Metal
+  - Plastic
+  - Glass
   layers:
   - Default
   - TransparentFX

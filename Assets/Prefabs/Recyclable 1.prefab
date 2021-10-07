@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65870279801362968}
   m_Layer: 0
   m_Name: 14025_Soda_Can_sg
-  m_TagString: Recyclable
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114137957676227066}
   m_Layer: 0
   m_Name: Recyclable 1
-  m_TagString: Recyclable
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
