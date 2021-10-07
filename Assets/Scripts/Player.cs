@@ -55,10 +55,9 @@ public class Player : MonoBehaviour {
 		uiManager = FindObjectOfType<UIManager>();
 		uiManager.UpdateBucket();
 
-		Invoke("StartRun", 3f);
+		Invoke("StartRun", 3f); //Use invoke for wait a little bit for call the function StartRun
 	}
 	
-	// Update is called once per frame
 	void Update () {
 
 		if (!canMove)
@@ -67,9 +66,10 @@ public class Player : MonoBehaviour {
 		score += Time.deltaTime * speed;
 		uiManager.UpdateScore((int)score);
 
+		//Inputs for control the player
 		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			ChangeLane(-1);
+			ChangeLane(-1); //ChangeLane with value -1 for move left
 		}
 		else if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
@@ -77,35 +77,35 @@ public class Player : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-			Jump();
+			Jump(); //That function allows player jump an obstacle
 		}
 		else if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			Slide();
+			Slide(); //That function allows player slide under an obstacle
 		}		
 
 		if (jumping)
 		{
-			float ratio = (transform.position.z - jumpStart) / jumpLength;
-			if(ratio >= 1f)
+			float ratio = (transform.position.z - jumpStart) / jumpLength; //Variable to control the proportion of the jump
+			if (ratio >= 1f) //When the jump is bigger than 1 the jump is over
 			{
 				jumping = false;
 				anim.SetBool("Jumping", false);
 			}
 			else
 			{
-				verticalTargetPosition.y = Mathf.Sin(ratio * Mathf.PI) * jumpHeight;
+				verticalTargetPosition.y = Mathf.Sin(ratio * Mathf.PI) * jumpHeight; //This calculation was taken from the Unity example project
 			}
 		}
 		else
 		{
-			verticalTargetPosition.y = Mathf.MoveTowards(verticalTargetPosition.y, 0, 5 * Time.deltaTime);
+			verticalTargetPosition.y = Mathf.MoveTowards(verticalTargetPosition.y, 0, 5 * Time.deltaTime); //Makes the player move in direction to targetPosition
 		}
 
 		if (sliding)
 		{
-			float ratio = (transform.position.z - slideStart) / slideLength;
-			if(ratio >= 1f)
+			float ratio = (transform.position.z - slideStart) / slideLength; //Variable to control the proportion of the slide
+			if(ratio >= 1f) //When the slide is bigger than 1 the jump is over
 			{
 				sliding = false;
 				anim.SetBool("Sliding", false);
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour {
 
 	private void FixedUpdate()
 	{ 
-		rb.velocity = Vector3.forward * speed;
+		rb.velocity = Vector3.forward * speed; //Allows player to run 
 	}
 
 	void StartRun()
@@ -141,18 +141,18 @@ public class Player : MonoBehaviour {
 	void ChangeLane(int direction)
 	{
 		int targetLane = currentLane + direction;
-		if (targetLane < 0 || targetLane > 2)
+		if (targetLane < 0 || targetLane > 2) //Verify if the player is moving just in the 3 lanes
 			return;
 		currentLane = targetLane;
-		verticalTargetPosition = new Vector3((currentLane - 1), 0, 0);
+		verticalTargetPosition = new Vector3((currentLane - 1), 0, 0); //set the targetPosition for move the Player
 	}
 
 	void Jump()
 	{
-		if (!jumping)
+		if (!jumping) //Verify if the Player is already jumping
 		{
 			jumpStart = transform.position.z;
-			anim.SetFloat("JumpSpeed", speed / jumpLength);
+			anim.SetFloat("JumpSpeed", speed / jumpLength); //Variable is a velocity multiplier of the animation 
 			anim.SetBool("Jumping", true);
 			jumping = true;
 		}
@@ -160,12 +160,12 @@ public class Player : MonoBehaviour {
 
 	void Slide()
 	{
-		if(!jumping && !sliding)
+		if(!jumping && !sliding) //Verify if the Player is jumping or sliding
 		{
 			slideStart = transform.position.z;
-			anim.SetFloat("JumpSpeed", speed / slideLength);
+			anim.SetFloat("JumpSpeed", speed / slideLength); //Variable is a velocity multiplier of the animation 
 			anim.SetBool("Sliding", true);
-			Vector3 newSize = boxCollider.size;
+			Vector3 newSize = boxCollider.size; //Change the size of the boxcollider
 			newSize.y = newSize.y / 2;
 			boxCollider.size = newSize;
 			sliding = true;
@@ -175,6 +175,7 @@ public class Player : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
+		//Check the collision with the recyclables materials
 		if (other.CompareTag("Paper") && uiManager.RecyclableType == "Paper")
 		{
 			recyclables++;
@@ -206,7 +207,7 @@ public class Player : MonoBehaviour {
 			other.transform.parent.gameObject.SetActive(false);
 		}
 
-		if (invincible)
+		if (invincible)  //if the player is blinking he cannot be hitted
 			return;
 
 		if (other.CompareTag("Obstacle"))
@@ -214,18 +215,13 @@ public class Player : MonoBehaviour {
 			canMove = false;
 			currentLife--;
 			uiManager.UpdateLives(currentLife);
-			anim.SetTrigger("Hit");
+			anim.SetTrigger("Hit");  //Trigger for start the damage animation
 			speed = 0;
-			if(currentLife <= 0)
+			if(currentLife <= 0) //GameOver condition
 			{
 				speed = 0;
 				anim.SetBool("Dead", true);
 				uiManager.gameOverPanel.SetActive(true);
-
-				//if(score > PlayServices.GetPlayerScore(EndlessRunnerServices.leaderboard_ranking))
-				//{
-					//PlayServices.PostScore((long)score, EndlessRunnerServices.leaderboard_ranking);
-				//}
 
 				Invoke("CallMenu", 2f);
 			}
@@ -242,21 +238,20 @@ public class Player : MonoBehaviour {
 		canMove = true;
 	}
 
-	IEnumerator Blinking(float time)
+	IEnumerator Blinking(float time) //Corroutine for make the player blinks and be invencible
 	{
 		invincible = true;
 		float timer = 0;
-		float currentBlink = 1f;
+		float currentBlink = 1f; 
 		float lastBlink = 0;
-		float blinkPeriod = 0.1f;
+		float blinkPeriod = 0.1f; //blinks every tenth of a second
 		bool enabled = false;
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(1f); //for wai
 		speed = minSpeed;
 		while(timer < time && invincible)
 		{
-			model.SetActive(enabled);
-			//Shader.SetGlobalFloat(blinkingValue, currentBlink);
-			yield return null;
+			model.SetActive(enabled); //activate and deactivate the model for make ir blink
+			yield return null; //for wait one frame
 			timer += Time.deltaTime;
 			lastBlink += Time.deltaTime;
 			if(blinkPeriod < lastBlink)
@@ -267,7 +262,6 @@ public class Player : MonoBehaviour {
 			}
 		}
 		model.SetActive(true);
-		//Shader.SetGlobalFloat(blinkingValue, 0);
 		invincible = false;
 	}
 

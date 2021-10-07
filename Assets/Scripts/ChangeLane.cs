@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChangeLane : MonoBehaviour {
 
-	public void PositionLane()
+	public void PositionLane() //Function to randomly change lane in the track
 	{
 		int randomLane = Random.Range(-1, 2);
 		transform.position = new Vector3(randomLane, transform.position.y, transform.position.z);

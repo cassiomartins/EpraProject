@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour {
 		bucketObject.GetComponent<Image>();
 	}
 
-	public void UpdateLives(int lives)
+	public void UpdateLives(int lives)  //Functions to check number of lives
 	{
 		for (int i = 0; i < lifeHearts.Length; i++)
 		{
@@ -29,22 +29,22 @@ public class UIManager : MonoBehaviour {
 			}
 			else
 			{
-				lifeHearts[i].color = Color.black;
+				lifeHearts[i].color = Color.black;  //if the number of lives is less than 3 turn the actual heart to black
 			}
 		}
 	}
 
-	public void UpdateRecyclables(int recyclable)
+	public void UpdateRecyclables(int recyclable) //Update the UI text of recyclables collected
 	{
 		recyclableText.text = recyclable.ToString();
 	}
 
-	public void UpdateScore(int score)
+	public void UpdateScore(int score) //Update the UI text of the distance 
 	{
 		scoreText.text = "Score: " + score + "m";
 	}
 
-	public void UpdateBucket()
+	public void UpdateBucket()  //Function to change the type of bucket in the canvas
     {
 		BucketIndex = Random.Range(0, buckets.Length);
 		bucketObject.sprite = buckets[BucketIndex];
