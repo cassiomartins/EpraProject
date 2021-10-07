@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour {
 	public GameObject gameOverPanel;
 	public Image bucketObject;
 	public Text scoreText;
+	public string RecyclableType;
+	private int BucketIndex;
 
 	void Start()
     {
@@ -44,7 +46,30 @@ public class UIManager : MonoBehaviour {
 
 	public void UpdateBucket()
     {
-		bucketObject.sprite = buckets[Random.Range(0, buckets.Length)];
-	}
+		BucketIndex = Random.Range(0, buckets.Length);
+		bucketObject.sprite = buckets[BucketIndex];
+
+        switch (BucketIndex)
+        {
+			case 0:
+				RecyclableType = "Paper";
+				break;
+			case 1:
+				RecyclableType = "Organic";
+				break;
+			case 2:
+				RecyclableType = "Glass";
+				break;
+			case 3:
+				RecyclableType = "Metal";
+				break;
+			case 4:
+				RecyclableType = "Plastic";
+				break; 
+			default:
+                break;
+        }
+
+    }
 
 }
